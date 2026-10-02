@@ -6,6 +6,8 @@ from sqlalchemy import Text, Integer, String, Boolean, DateTime, JSON, ForeignKe
 from datetime import datetime, timezone
 import json
 
+from app.config import settings
+
 
 class Base(DeclarativeBase):
     pass
@@ -91,9 +93,6 @@ class ReminderConfig(Base):
 
 engine = create_async_engine(settings.database_url, echo=False)
 async_session = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
-
-
-from app.config import settings  # noqa: E402
 
 
 async def init_db():
