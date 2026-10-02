@@ -1,0 +1,15 @@
+﻿Initial build: Ten at a Time -- compassionate chore tracker
+
+Full-stack PWA with:
+- FastAPI backend (SQLite, async SQLAlchemy)
+- React/TypeScript frontend (Vite, TailwindCSS)
+- Task library seeded with all daily/weekly/zone/monthly/maintenance tasks
+- Rotation engine (daily anchors, weekly rhythm, 12-week zone cycle, monthly, maintenance)
+- Pain Day mode (single highest-impact task, no backlog pressure)
+- Push notification system (VAPID, service worker, APScheduler)
+- Calm warm-neutral UI, no gamification, no shame language
+- Docker Compose deployment (nginx + FastAPI)
+
+Generated with [Devin](https://devin.ai)
+
+Co-Authored-By: Devin <158243242+devin-ai-integration[bot]@users.noreply.github.com>

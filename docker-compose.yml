@@ -1,0 +1,38 @@
+﻿services:
+  backend:
+    build: ./backend
+    container_name: ten-backend
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - app-data:/app/data
+    environment:
+      - DATABASE_URL=sqlite+aiosqlite:////app/data/tenatatime.db
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health', timeout=3)"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+    networks:
+      - internal
+      - nginx-proxy
+
+  frontend:
+    build: ./frontend
+    container_name: ten-frontend
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - internal
+      - nginx-proxy
+
+volumes:
+  app-data:
+
+networks:
+  internal:
+  nginx-proxy:
+    external: true
