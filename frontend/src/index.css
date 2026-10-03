@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 body {
-  background-color: #fdfaf6;
-  color: #423b2e;
+  background-color: #1a1525;
+  color: #d4c8e0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -18,9 +18,9 @@ body {
   transition: opacity 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
-/* No aggressive focus rings -- soft and warm */
+/* Soft focus ring in teal */
 button:focus-visible, a:focus-visible {
-  outline: 2px solid #b0936a;
+  outline: 2px solid #3a9b88;
   outline-offset: 2px;
   border-radius: 0.5rem;
 }

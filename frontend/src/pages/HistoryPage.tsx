@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Clock, CheckCircle2 } from 'lucide-react'
 import { apiClient, type HistoryEntry } from '@/lib/api'
 import { toast } from 'sonner'
@@ -33,8 +33,8 @@ export default function HistoryPage() {
   return (
     <div className="space-y-6 pt-4">
       <div>
-        <h1 className="text-2xl font-serif text-warm-700">History</h1>
-        <p className="text-sm text-warm-400 mt-1">
+        <h1 className="text-2xl font-serif text-ink-100">History</h1>
+        <p className="text-sm text-ink-400 mt-1">
           Here''s where you''ve been. Just patterns, no pressure.
         </p>
       </div>
@@ -47,8 +47,8 @@ export default function HistoryPage() {
             onClick={() => setDays(d)}
             className={`px-3 py-1.5 rounded-xl text-sm transition-colors ${
               days === d
-                ? 'bg-sage-500 text-white'
-                : 'bg-cream-100 text-warm-500 hover:bg-cream-200'
+                ? 'bg-teal-500 text-white'
+                : 'bg-plum-100 text-plum-500 hover:bg-plum-200'
             }`}
           >
             {d} days
@@ -57,11 +57,11 @@ export default function HistoryPage() {
       </div>
 
       {loading ? (
-        <p className="text-warm-400 text-sm">Loading...</p>
+        <p className="text-ink-400 text-sm">Loading...</p>
       ) : entries.length === 0 ? (
         <div className="text-center py-12 space-y-2">
-          <Clock className="h-10 w-10 text-warm-300 mx-auto" strokeWidth={1.5} />
-          <p className="text-sm text-warm-400">
+          <Clock className="h-10 w-10 text-violet-400 mx-auto" strokeWidth={1.5} />
+          <p className="text-sm text-ink-400">
             Nothing here yet. That''s okay. Start when you''re ready.
           </p>
         </div>
@@ -74,13 +74,13 @@ export default function HistoryPage() {
             })
             return (
               <div key={date} className="space-y-1.5">
-                <p className="text-xs font-medium text-warm-400">{dayDate}</p>
+                <p className="text-xs font-medium text-ink-400">{dayDate}</p>
                 <div className="space-y-1">
                   {dayEntries.map((entry, i) => (
                     <div key={i} className="flex items-center gap-2 pl-1">
-                      <CheckCircle2 className="h-4 w-4 text-sage-400 flex-shrink-0" strokeWidth={1.5} />
-                      <span className="text-sm text-warm-600">{entry.task_title}</span>
-                      <span className="text-[11px] text-warm-400 ml-auto">{entry.zone}</span>
+                      <CheckCircle2 className="h-4 w-4 text-teal-400 flex-shrink-0" strokeWidth={1.5} />
+                      <span className="text-sm text-ink-200">{entry.task_title}</span>
+                      <span className="text-[11px] text-ink-400 ml-auto">{entry.zone}</span>
                     </div>
                   ))}
                 </div>
@@ -90,7 +90,7 @@ export default function HistoryPage() {
         </div>
       )}
 
-      <p className="text-xs text-warm-400 italic text-center pt-2">
+      <p className="text-xs text-ink-400 italic text-center pt-2">
         No streaks to break. Just a record of what you''ve done.
       </p>
     </div>

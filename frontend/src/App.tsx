@@ -1,4 +1,4 @@
-﻿import { Routes, Route, NavLink, useLocation } from 'react-router-dom'
+import { Routes, Route, NavLink, useLocation } from 'react-router-dom'
 import { Home, Heart, MapPin, Wrench, Settings, Clock } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import TodayPage from '@/pages/TodayPage'
@@ -21,7 +21,7 @@ export default function App() {
   const location = useLocation()
 
   return (
-    <div className="min-h-screen bg-cream-50 flex flex-col">
+    <div className="min-h-screen bg-plum-50 flex flex-col">
       <main className="flex-1 max-w-2xl mx-auto w-full px-4 pb-24 pt-6 safe-top">
         <Routes>
           <Route path="/" element={<TodayPage />} />
@@ -34,7 +34,7 @@ export default function App() {
       </main>
 
       {/* Bottom nav -- calm, not flashy */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-cream-100/95 backdrop-blur-sm border-t border-cream-200 safe-bottom z-50">
+      <nav className="fixed bottom-0 left-0 right-0 bg-plum-100/95 backdrop-blur-sm border-t border-plum-200 safe-bottom z-50">
         <div className="max-w-2xl mx-auto flex justify-around items-center px-2 py-2">
           {navItems.map(({ to, icon: Icon, label }) => (
             <NavLink
@@ -45,8 +45,8 @@ export default function App() {
                 cn(
                   'flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-colors',
                   isActive
-                    ? 'text-sage-600'
-                    : 'text-warm-400 hover:text-warm-600'
+                    ? 'text-teal-400'
+                    : 'text-ink-400 hover:text-ink-200'
                 )
               }
             >

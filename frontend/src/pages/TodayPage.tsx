@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { CheckCircle2, Circle, Clock, MapPin, Sparkles } from 'lucide-react'
 import { apiClient, type TodaySummary, type TaskOut } from '@/lib/api'
 import { cn } from '@/lib/utils'
@@ -42,7 +42,7 @@ export default function TodayPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <p className="text-warm-400 text-sm">Loading...</p>
+        <p className="text-ink-400 text-sm">Loading...</p>
       </div>
     )
   }
@@ -57,10 +57,10 @@ export default function TodayPage() {
     <div className="space-y-6">
       {/* Header -- calm, warm */}
       <div>
-        <p className="text-sm text-warm-400">{today}</p>
-        <h1 className="text-2xl font-serif text-warm-700 mt-1">Ready when you are.</h1>
+        <p className="text-sm text-ink-400">{today}</p>
+        <h1 className="text-2xl font-serif text-ink-100 mt-1">Ready when you are.</h1>
         {summary.completed_count > 0 && (
-          <p className="text-sm text-sage-500 mt-1">
+          <p className="text-sm text-teal-500 mt-1">
             {summary.completed_count} {summary.completed_count === 1 ? 'thing' : 'things'} done today.
           </p>
         )}
@@ -105,7 +105,7 @@ export default function TodayPage() {
       {/* Maintenance */}
       {summary.maintenance.length > 0 && (
         <div className="space-y-2">
-          <h2 className="text-sm font-medium text-warm-500">{CATEGORY_LABELS.maintenance}</h2>
+          <h2 className="text-sm font-medium text-plum-500">{CATEGORY_LABELS.maintenance}</h2>
           <div className="space-y-2">
             {summary.maintenance
               .filter(m => m.is_due_soon || m.days_until_due <= 0)
@@ -124,7 +124,7 @@ export default function TodayPage() {
 
       {/* Footer message */}
       <div className="pt-4 pb-2 text-center">
-        <p className="text-xs text-warm-400 italic">
+        <p className="text-xs text-ink-400 italic">
           Here''s where you are. What feels doable right now?
         </p>
       </div>
@@ -147,9 +147,9 @@ function TaskSection({
   return (
     <div className="space-y-2">
       <div className="flex items-baseline justify-between">
-        <h2 className="text-sm font-medium text-warm-500">{label}</h2>
+        <h2 className="text-sm font-medium text-plum-500">{label}</h2>
         {hint && !allDone && (
-          <span className="text-xs text-warm-400">{hint}</span>
+          <span className="text-xs text-ink-400">{hint}</span>
         )}
       </div>
       <div className="space-y-1.5">
@@ -158,7 +158,7 @@ function TaskSection({
         ))}
       </div>
       {allDone && (
-        <p className="text-xs text-sage-500 italic pl-1">All done. Nice.</p>
+        <p className="text-xs text-teal-500 italic pl-1">All done. Nice.</p>
       )}
     </div>
   )
@@ -177,30 +177,30 @@ function TaskCard({
       className={cn(
         'w-full flex items-start gap-3 p-3 rounded-2xl text-left transition-colors',
         task.is_done_today
-          ? 'bg-cream-100 opacity-60'
-          : 'bg-cream-100 hover:bg-cream-200 active:bg-cream-200'
+          ? 'bg-plum-100 opacity-60'
+          : 'bg-plum-100 hover:bg-plum-200 active:bg-plum-200'
       )}
     >
       {task.is_done_today ? (
-        <CheckCircle2 className="h-5 w-5 text-sage-500 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
+        <CheckCircle2 className="h-5 w-5 text-teal-500 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
       ) : (
-        <Circle className="h-5 w-5 text-warm-300 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
+        <Circle className="h-5 w-5 text-violet-400 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
       )}
       <div className="flex-1 min-w-0">
         <p className={cn(
           'text-sm',
-          task.is_done_today ? 'text-warm-400 line-through' : 'text-warm-700'
+          task.is_done_today ? 'text-ink-400 line-through' : 'text-ink-100'
         )}>
           {task.title}
         </p>
         <div className="flex items-center gap-2 mt-0.5">
           {task.zone && (
-            <span className="flex items-center gap-0.5 text-[11px] text-warm-400">
+            <span className="flex items-center gap-0.5 text-[11px] text-ink-400">
               <MapPin className="h-3 w-3" strokeWidth={1.5} />
               {task.zone}
             </span>
           )}
-          <span className="flex items-center gap-0.5 text-[11px] text-warm-400">
+          <span className="flex items-center gap-0.5 text-[11px] text-ink-400">
             <Clock className="h-3 w-3" strokeWidth={1.5} />
             {task.estimated_minutes} min
           </span>
@@ -231,22 +231,22 @@ function MaintenanceCard({
       className={cn(
         'w-full flex items-start gap-3 p-3 rounded-2xl text-left transition-colors border',
         isDone
-          ? 'bg-cream-100 opacity-60 border-cream-200'
+          ? 'bg-plum-100 opacity-60 border-plum-200'
           : daysUntilDue <= 0
-          ? 'bg-terracotta-400/10 border-terracotta-400/30 hover:bg-terracotta-400/15'
-          : 'bg-cream-100 border-cream-200 hover:bg-cream-200'
+          ? 'bg-coral-400/10 border-coral-400/30 hover:bg-coral-400/15'
+          : 'bg-plum-100 border-plum-200 hover:bg-plum-200'
       )}
     >
       {isDone ? (
-        <CheckCircle2 className="h-5 w-5 text-sage-500 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
+        <CheckCircle2 className="h-5 w-5 text-teal-500 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
       ) : (
-        <Circle className="h-5 w-5 text-warm-300 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
+        <Circle className="h-5 w-5 text-violet-400 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
       )}
       <div className="flex-1 min-w-0">
-        <p className={cn('text-sm', isDone ? 'text-warm-400 line-through' : 'text-warm-700')}>
+        <p className={cn('text-sm', isDone ? 'text-ink-400 line-through' : 'text-ink-100')}>
           {task.title}
         </p>
-        <span className="text-[11px] text-warm-400">{dueText}</span>
+        <span className="text-[11px] text-ink-400">{dueText}</span>
       </div>
     </button>
   )
