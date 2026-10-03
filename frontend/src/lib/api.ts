@@ -5,6 +5,27 @@ const api = axios.create({
   timeout: 30000,
 })
 
+// Attach auth token to every request
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('ten_token')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config
+})
+
+// Auto-logout on 401
+api.interceptors.response.use(
+  (res) => res,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('ten_token')
+      window.location.reload()
+    }
+    return Promise.reject(error)
+  }
+)
+
 export interface TaskOut {
   id: number
   title: string
@@ -67,6 +88,10 @@ export interface HistoryEntry {
 }
 
 export const apiClient = {
+  login: (password: string) =>
+    api.post<{ token: string }>('/auth/login', { password }),
+  verifyToken: () => api.post<{ valid: boolean }>('/auth/verify'),
+  logout: () => api.post('/auth/logout'),
   getToday: () => api.get<TodaySummary>('/tasks/today'),
   completeTask: (task_id: number, occurrence_date?: string) =>
     api.post('/tasks/complete', { task_id, occurrence_date }),

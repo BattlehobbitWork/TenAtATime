@@ -1,12 +1,15 @@
+import { useState, useEffect } from 'react'
 import { Routes, Route, NavLink, useLocation } from 'react-router-dom'
 import { Home, Heart, MapPin, Wrench, Settings, Clock } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { apiClient } from '@/lib/api'
 import TodayPage from '@/pages/TodayPage'
 import PainDayPage from '@/pages/PainDayPage'
 import ZonePage from '@/pages/ZonePage'
 import MaintenancePage from '@/pages/MaintenancePage'
 import HistoryPage from '@/pages/HistoryPage'
 import SettingsPage from '@/pages/SettingsPage'
+import LoginPage from '@/pages/LoginPage'
 
 const navItems = [
   { to: '/', icon: Home, label: 'Today' },
@@ -19,6 +22,33 @@ const navItems = [
 
 export default function App() {
   const location = useLocation()
+  const [authed, setAuthed] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    const token = localStorage.getItem('ten_token')
+    if (!token) {
+      setAuthed(false)
+      return
+    }
+    // Verify token is still valid
+    apiClient.verifyToken()
+      .then((res) => setAuthed(res.data.valid))
+      .catch(() => setAuthed(false))
+  }, [])
+
+  // Show nothing while checking auth
+  if (authed === null) {
+    return (
+      <div className="min-h-screen bg-plum-50 flex items-center justify-center">
+        <div className="text-ink-400 text-sm">Loading...</div>
+      </div>
+    )
+  }
+
+  // Show login page if not authenticated
+  if (!authed) {
+    return <LoginPage onLogin={() => setAuthed(true)} />
+  }
 
   return (
     <div className="min-h-screen bg-plum-50 flex flex-col">

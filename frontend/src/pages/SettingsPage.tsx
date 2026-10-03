@@ -158,6 +158,17 @@ export default function SettingsPage() {
       <p className="text-xs text-ink-400 italic text-center pt-2">
         Ten at a Time -- a home management partner, not a taskmaster.
       </p>
+
+      <button
+        onClick={() => {
+          apiClient.logout().catch(() => {})
+          localStorage.removeItem('ten_token')
+          window.location.reload()
+        }}
+        className="w-full px-4 py-3 rounded-2xl bg-plum-200 text-ink-200 font-medium hover:bg-plum-300 transition-colors"
+      >
+        Sign out
+      </button>
     </div>
   )
 }
