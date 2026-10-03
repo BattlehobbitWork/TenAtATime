@@ -16,7 +16,6 @@
       start_period: 10s
     networks:
       - internal
-      - nginx-proxy
 
   frontend:
     build: ./frontend
@@ -27,12 +26,18 @@
         condition: service_healthy
     networks:
       - internal
-      - nginx-proxy
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.ten.rule=Host(`ten.werewolfhowl.com`)
+      - traefik.http.routers.ten.entrypoints=websecure
+      - traefik.http.routers.ten.tls.certresolver=letsencrypt
+      - traefik.http.services.ten.loadbalancer.server.port=80
 
 volumes:
   app-data:
 
 networks:
   internal:
-  nginx-proxy:
+  traefik:
     external: true
