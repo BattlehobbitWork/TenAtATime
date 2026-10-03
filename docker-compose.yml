@@ -14,8 +14,6 @@
       timeout: 3s
       retries: 10
       start_period: 10s
-    networks:
-      - internal
 
   frontend:
     build: ./frontend
@@ -24,20 +22,14 @@
     depends_on:
       backend:
         condition: service_healthy
-    networks:
-      - internal
-      - traefik
     labels:
       - traefik.enable=true
       - traefik.http.routers.ten.rule=Host(`ten.werewolfhowl.com`)
       - traefik.http.routers.ten.entrypoints=websecure
+      - traefik.http.routers.ten.tls=true
       - traefik.http.routers.ten.tls.certresolver=letsencrypt
-      - traefik.http.services.ten.loadbalancer.server.port=80
+      - traefik.http.routers.ten.service=ten-svc
+      - traefik.http.services.ten-svc.loadbalancer.server.port=80
 
 volumes:
   app-data:
-
-networks:
-  internal:
-  traefik:
-    external: true
